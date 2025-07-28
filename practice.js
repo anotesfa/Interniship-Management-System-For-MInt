@@ -12,15 +12,19 @@ const server= http.createServer((req,res)=>{
   }
    else if(PathUrl==='/api'){
     res.end("API!");
-  }
-
   
+  fs.readFile(`${__dirname}data.json`,'utf8',(err,data)=>{
+    if(err) throw err;
+    const productData=JSON.parse(data);
+    console.log(productData);
+  })
+   }
   else {
     res.writeHead(404, {
       'content-type':'text/html',
       'myprofile':'Hello-HELLOOOO'
     });
-    res.end("<h1>Page not found</h1>");//hfh
+    res.end("<h1>Page not found</h1>");
   }
 })
 server.listen(8000,'127.0.0.1',()=>{
