@@ -10,6 +10,7 @@ const server= http.createServer((req,res)=>{
     res.end("This is PRODUCT!");
   }
   else {
+    res.headWrite(404);
     res.end("Page not found");
   }
 })
