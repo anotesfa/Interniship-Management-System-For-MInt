@@ -10,14 +10,13 @@ const server= http.createServer((req,res)=>{
   else if(PathUrl==='/product'){
     res.end("This is PRODUCT!");
   }
-   else if(PathUrl==='/api'){
-    res.end("API!");
-  
-  fs.readFile(`${__dirname}data.json`,'utf8',(err,data)=>{
+   else if(PathUrl==='/api'){ 
+  fs.readFile(`${__dirname}/data.json`,'utf8',(err,data)=>{
     if(err) throw err;
     const productData=JSON.parse(data);
     console.log(productData);
   })
+      res.end("API!");
    }
   else {
     res.writeHead(404, {
