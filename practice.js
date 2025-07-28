@@ -10,11 +10,11 @@ const server= http.createServer((req,res)=>{
     res.end("This is PRODUCT!");
   }
   else {
-    res.writeHead(404 {
+    res.writeHead(404, {
       'content-type':'text/html',
-      'my-own-header':'Hello-HELLOOOO'
+      'myprofile':'Hello-HELLOOOO'
     });
-    res.end("<h1>Page not found"</h1>);//hfh
+    res.end("<h1>Page not found</h1>");//hfh
   }
 })
 server.listen(8000,'127.0.0.1',()=>{
