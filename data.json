@@ -1,20 +1,53 @@
 [
   {
     "id": 1,
-    "name": "Laptop",
-    "price": 1200,
-    "inStock": true
+    "brand": "Toyota",
+    "model": "Corolla",
+    "year": 2022,
+    "color": "Silver",
+    "engineType": "Hybrid",
+    "horsepower": 121,
+    "transmission": "Automatic",
+    "features": "Air Conditioning, Bluetooth, Backup Camera, Cruise Control, Lane Assist",
+    "isAvailable": true,
+    "mileage": 15000,
+    "locationCity": "Addis Ababa",
+    "locationCountry": "Ethiopia",
+    "ownerName": "Anam Tesfa",
+    "ownerContact": "anam@example.com"
   },
   {
     "id": 2,
-    "name": "Smartphone",
-    "price": 800,
-    "inStock": false
+    "brand": "Honda",
+    "model": "Civic",
+    "year": 2021,
+    "color": "Black",
+    "engineType": "Gasoline",
+    "horsepower": 158,
+    "transmission": "Manual",
+    "features": "Bluetooth, Heated Seats, Sunroof",
+    "isAvailable": false,
+    "mileage": 22000,
+    "locationCity": "Jimma",
+    "locationCountry": "Ethiopia",
+    "ownerName": "Liya Bekele",
+    "ownerContact": "liya@example.com"
   },
   {
     "id": 3,
-    "name": "Headphones",
-    "price": 150,
-    "inStock": true
+    "brand": "Hyundai",
+    "model": "Elantra",
+    "year": 2023,
+    "color": "White",
+    "engineType": "Electric",
+    "horsepower": 201,
+    "transmission": "Automatic",
+    "features": "Navigation, Apple CarPlay, Adaptive Cruise Control",
+    "isAvailable": true,
+    "mileage": 5000,
+    "locationCity": "Hawassa",
+    "locationCountry": "Ethiopia",
+    "ownerName": "Samuel Worku",
+    "ownerContact": "samuel@example.com"
   }
 ]
