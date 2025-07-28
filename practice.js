@@ -11,12 +11,12 @@ const server= http.createServer((req,res)=>{
     res.end("This is PRODUCT!");
   }
    else if(PathUrl==='/api'){ 
-  fs.readFile(`${__dirname}/data.json`,'utf8',(err,data)=>{
-    if(err) throw err;
-    const productData=JSON.parse(data);
+  
+    fs.readFile(`${__dirname}/data.json`,'utf8',(err,data)=>{
+    const productData= JSON.parse(data);
     console.log(productData);
   })
-      res.end("API!");
+          res.end('API!');
    }
   else {
     res.writeHead(404, {
