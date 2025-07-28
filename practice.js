@@ -1,5 +1,6 @@
 const http=require('http');
 const url=require('url');
+const fs= require('fs');
 
 const server= http.createServer((req,res)=>{
   const PathUrl=req.url;
@@ -12,6 +13,8 @@ const server= http.createServer((req,res)=>{
    else if(PathUrl==='/api'){
     res.end("API!");
   }
+
+  
   else {
     res.writeHead(404, {
       'content-type':'text/html',
