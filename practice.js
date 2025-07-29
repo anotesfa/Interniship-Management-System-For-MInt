@@ -2,6 +2,13 @@ const http=require('http');
 const url=require('url');
 const fs= require('fs');
 
+ fs.readFile(`${__dirname}/data.json`,'utf8',(err,data)=>{
+ 
+    res.writeHead(200,{
+      'Content-type':'application/json' });
+          res.end(data);
+  })
+  
 const server= http.createServer((req,res)=>{
   const PathUrl=req.url;
   if(PathUrl==='/' || PathUrl==='/overview'){
@@ -13,10 +20,12 @@ const server= http.createServer((req,res)=>{
    else if(PathUrl==='/api'){ 
   
     fs.readFile(`${__dirname}/data.json`,'utf8',(err,data)=>{
-    const productData= JSON.parse(data);
-    console.log(productData);
+ 
+    res.writeHead(200,{
+      'Content-type':'application/json' });
+          res.end(data);
   })
-          res.end('API!');
+
    }
   else {
     res.writeHead(404, {
