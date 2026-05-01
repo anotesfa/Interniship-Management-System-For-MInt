@@ -25,7 +25,6 @@ const server= http.createServer((req,res)=>{
       'Content-type':'application/json' });
           res.end(data);
   })
-ffggf
    }
   else {
     res.writeHead(404, {
