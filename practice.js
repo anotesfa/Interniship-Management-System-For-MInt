@@ -3,7 +3,7 @@ const url=require('url');
 const fs= require('fs');
 
  fs.readFile(`${__dirname}/data.json`,'utf8',(err,data)=>{
- 
+  
     res.writeHead(200,{
       'Content-type':'application/json' });
           res.end(data);
