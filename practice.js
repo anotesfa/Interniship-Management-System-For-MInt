@@ -17,7 +17,7 @@ const server= http.createServer((req,res)=>{
   else if(PathUrl==='/product'){
     res.end("This is PRODUCT!");
   }
-   else if(PathUrl==='/api'){ 
+   else if(PathUrl==='/api'){  
   
     fs.readFile(`${__dirname}/data.json`,'utf8',(err,data)=>{
  
