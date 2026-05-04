@@ -26,7 +26,7 @@ const server= http.createServer((req,res)=>{
           res.end(data);
   }) 
    }
-  else {    
+  else {
     res.writeHead(404, {
       'content-type':'text/html',
       'myprofile':'Hello-HELLOOOO'
