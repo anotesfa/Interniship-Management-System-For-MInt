@@ -31,7 +31,7 @@ const server= http.createServer((req,res)=>{
       'content-type':'text/html',
       'myprofile':'Hello-HELLOOOO'
     });
-    res.end("<h1>Page not found</h1>");  
+    res.end("<h1>Page not found</h1>");   
   }
 })  
 server.listen(8000,'127.0.0.1',()=>{
