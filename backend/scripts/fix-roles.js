@@ -46,6 +46,7 @@ async function main() {
   }
 }
 
+
 main()
   .catch((e) => {
     console.error('Error running fix-roles script:', e);
