@@ -6,6 +6,7 @@ CREATE TABLE "roles" (
     CONSTRAINT "roles_pkey" PRIMARY KEY ("role_id")
 );
 
+
 -- CreateTable
 CREATE TABLE "users" (
     "user_id" SERIAL NOT NULL,
