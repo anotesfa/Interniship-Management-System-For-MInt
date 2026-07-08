@@ -1,4 +1,3 @@
-// One-off script to normalize role names in the database.
 // Usage: from repo root run `cd backend && node scripts/fix-roles.js`
 
 const { PrismaClient } = require('@prisma/client');
