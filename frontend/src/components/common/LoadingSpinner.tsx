@@ -13,6 +13,7 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ size = 'md', tex
     lg: 'h-12 w-12',
   };
 
+
   return (
     <div className="flex flex-col items-center justify-center p-8 gap-3">
       <svg
