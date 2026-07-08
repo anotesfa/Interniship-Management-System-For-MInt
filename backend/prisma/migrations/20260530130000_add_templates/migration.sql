@@ -13,6 +13,7 @@ CREATE TABLE "templates" (
     CONSTRAINT "templates_pkey" PRIMARY KEY ("template_id")
 );
 
+
 -- CreateIndex
 CREATE INDEX "templates_is_active_idx" ON "templates"("is_active");
 
