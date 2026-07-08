@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Ethiopic:wght@400;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Brand */
+    --col-navy:        #0F2040;
+    --col-blue:        #1A3D6B;
+    --col-steel:       #2E5B8A;
+    --col-pale:        #E8EFF8;
+
+    /* Ethiopian flag */
+    --col-green:       #078930;
+    --col-yellow:      #FCDD09;
+    --col-red:         #B91C1C;
+
+    /* Surfaces */
+    --col-surface:     #F2F4F8;
+    --col-white:       #FFFFFF;
+    --col-input:       #F7F9FC;
+
+    /* Borders */
+    --col-border:      #DDE2ED;
+    --col-border-sub:  #EEF1F7;
+    --col-border-str:  #B8C2D8;
+
+    /* Text */
+    --col-text-1:      #0F2040;
+    --col-text-2:      #374151;
+    --col-text-3:      #4A5568;
+    --col-text-4:      #8898B4;
+  }
+
+  body {
+    @apply font-sans text-body text-text-primary bg-surface-page antialiased;
+    margin: 0;
+  }
+
+  code { @apply font-mono; }
+  h1   { @apply text-h1 text-text-primary; }
+  h2   { @apply text-h2 text-text-primary; }
+  h3   { @apply text-h3 text-text-primary; }
+
+  /* Smooth scrollbar */
+  ::-webkit-scrollbar         { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track   { background: transparent; }
+  ::-webkit-scrollbar-thumb   { background: var(--col-border-str); border-radius: 99px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--col-steel); }
+}
+
+@layer components {
+  /* ─── Focus ring ─── */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-mint-blue focus:ring-offset-1;
+  }
+
+  /* ─── Ethiopian flag stripe ─── */
+  .eth-flag-stripe {
+    @apply flex;
+  }
+  .eth-flag-stripe > div:nth-child(1) { @apply flex-1 bg-eth-green; }
+  .eth-flag-stripe > div:nth-child(2) { @apply flex-1 bg-eth-yellow; }
+  .eth-flag-stripe > div:nth-child(3) { @apply flex-1 bg-eth-red; }
+
+  /* ─── Page section header ─── */
+  .page-section-title {
+    @apply text-xs font-semibold uppercase tracking-widest text-text-hint;
+  }
+
+  /* ─── Table base ─── */
+  .mint-table {
+    @apply w-full text-body-sm border-collapse;
+  }
+  .mint-table thead th {
+    @apply text-left px-4 py-2.5 text-caption font-semibold text-text-hint uppercase tracking-wider
+           border-b border-border-default bg-surface-page;
+  }
+  .mint-table tbody td {
+    @apply px-4 py-3 text-text-primary border-b border-border-subtle;
+  }
+  .mint-table tbody tr:last-child td {
+    @apply border-b-0;
+  }
+  .mint-table tbody tr:hover td {
+    @apply bg-surface-page;
+  }
+}

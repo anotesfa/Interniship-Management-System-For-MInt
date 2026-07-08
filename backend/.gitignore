@@ -1,0 +1,54 @@
+# compiled output
+/dist
+/node_modules
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# OS
+.DS_Store
+
+# Tests
+/coverage
+/.nyc_output
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# MISC
+/.angular/cache
+
+# Prisma
+/prisma/sqlite.db
+/prisma/sqlite.db-journal
+
+# Secrets & Environment variables
+.env
+.env.production
+.env.development
+.env.test
+.env.local
+
+# IMS Custom Dirs
+/keys
+/uploads
+test.js
+generate-keys.js
