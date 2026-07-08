@@ -1,4 +1,4 @@
-// Modal component — MInT IMS Design System
+// MInT IMS Design System
 import React, { useEffect } from 'react';
 
 interface ModalProps {
