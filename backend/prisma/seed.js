@@ -51,9 +51,8 @@ const ethiopianLastNames = [
 ];
 
 const universities = [
-  { code: 'hu', name: 'Haramaya University', email: 'hu' },
-  { code: 'aau', name: 'Addis Ababa University', email: 'aau' },
   { code: 'ju', name: 'Jimma University', email: 'ju' },
+  { code: 'aau', name: 'Addis Ababa University', email: 'aau' },
   { code: 'bdu', name: 'Bahir Dar University', email: 'bdu' },
   { code: 'mu', name: 'Mekelle University', email: 'mu' },
   { code: 'uog', name: 'University of Gondar', email: 'uog' },
@@ -103,7 +102,7 @@ const majorUniversitySupervisors = [
   },
   {
     fullName: 'Dr. Genet Wolde',
-    email: 'genet.wolde@hu.edu.et',
+    email: 'genet.wolde@ju.edu.et',
     department: 'Management Information Systems',
   },
 ];
@@ -276,7 +275,7 @@ async function main() {
   const atinafUser = await prisma.user.create({
     data: {
       full_name: 'Atinaf Bedasa',
-      email: 'atinaf.bedasa@hu.edu.et',
+      email: 'atinaf.bedasa@ju.edu.et',
       password_hash: await bcrypt.hash(
         buildStudentPassword('Bedasa', 'UGR 22/15'),
         12,
@@ -307,13 +306,13 @@ async function main() {
       ethiopianLastNames[
         Math.floor(i / ethiopianFirstNames.length) % ethiopianLastNames.length
       ];
-    const university = createdUniversities[0]; // Always Haramaya
+    const university = createdUniversities[0]; // Always Jimma University
     const dept = departments[i % departments.length];
 
     const studentUser = await prisma.user.create({
       data: {
         full_name: `${firstName} ${lastName}`,
-        email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}@hu.edu.et`,
+        email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}@ju.edu.et`,
         password_hash: await bcrypt.hash(
           buildStudentPassword(lastName, `UGR/${1000 + i}/15`),
           12,
@@ -376,7 +375,7 @@ async function main() {
   }
 
   console.log('🏫 Creating university coordinator users (1)...');
-  // 6. Create University Coordinators (1 for Haramaya)
+  // 6. Create University Coordinators (1 for Jimma University)
   const coordinators = [];
   const coordFirstName = ethiopianFirstNames[15 % ethiopianFirstNames.length];
   const coordLastName = ethiopianLastNames[8 % ethiopianLastNames.length];
@@ -384,7 +383,7 @@ async function main() {
   const coordUser = await prisma.user.create({
     data: {
       full_name: `${coordFirstName} ${coordLastName}`,
-      email: `coordinator@hu.edu.et`,
+      email: `coordinator@ju.edu.et`,
       password_hash: uniPassword,
       role_id: coordinatorRole.role_id,
       account_status: 'active',
@@ -659,10 +658,10 @@ async function main() {
   - Evaluations: 22
 
 🔐 Test Credentials:
-  - Admin: abebe.kebede@hu.edu.et / admin123
-  - Student: abebe.alemu@hu.edu.et / student123
-  - Supervisor: dr.kidus.kebede@hu.edu.et / super123
-  - University: coordinator@hu.edu.et / uni123
+  - Admin: abebe.kebede@mint.gov / admin123
+  - Student: abebe.alemu@ju.edu.et / student123
+  - Supervisor: dr.kidus.kebede@mint.gov / super123
+  - University: coordinator@ju.edu.et / uni123
   - Any other student email created by the seed uses / student123
   - Any other supervisor email created by the seed uses / super123
   `);

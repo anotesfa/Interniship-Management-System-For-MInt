@@ -24,7 +24,7 @@ Use these after running `npm run db:reset` from `backend/` and then `npm run see
 | ------------------------ | -------- | ---- |
 | abebe.kebede@mint.gov    | admin123 | Admin |
 | tigist.mengistu@mint.gov | admin123 | Admin |
-| coordinator@hu.edu.et    | uni123   | University Coordinator |
+| coordinator@ju.edu.et    | uni123   | University Coordinator |
 | abebe.kebede@aau.edu.et  | super123 | Supervisor |
 
 ## Notes
