@@ -1,4 +1,3 @@
-// Card component — MInT IMS Design System
 import React from 'react';
 
 interface CardProps {
@@ -11,48 +10,45 @@ interface CardProps {
   accentColor?: 'green' | 'blue' | 'amber' | 'red' | 'none';
 }
 
-export const Card: React.FC<CardProps> = ({
-  children,
-  className = '',
-  title,
-  subtitle,
-  actions,
-  padding = 'md',
-  accentColor = 'none',
-}) => {
-  const paddingStyles: Record<string, string> = {
-    none: '',
-    sm:   'p-4',
-    md:   'p-5',
-    lg:   'p-6',
-  };
-
-  const accentStyles: Record<string, string> = {
-    green: 'border-l-[3px] border-l-eth-green',
-    blue:  'border-l-[3px] border-l-mint-steel',
-    amber: 'border-l-[3px] border-l-status-pending-dot',
-    red:   'border-l-[3px] border-l-eth-red',
-    none:  '',
-  };
-
-  return (
-    <div className={`bg-surface-white rounded-md border border-border-default shadow-level-1 overflow-hidden ${accentStyles[accentColor]} ${className}`}>
-      {(title || actions) && (
-        <div className="px-5 py-3.5 border-b border-border-subtle flex items-center justify-between gap-4">
-          <div className="min-w-0">
-            {title && (
-              <h3 className="text-[0.9375rem] font-semibold text-text-primary leading-tight">
-                {title}
-              </h3>
-            )}
-            {subtitle && (
-              <p className="text-caption text-text-hint mt-0.5">{subtitle}</p>
-            )}
-          </div>
-          {actions && <div className="flex items-center gap-2 flex-shrink-0">{actions}</div>}
-        </div>
-      )}
-      <div className={paddingStyles[padding]}>{children}</div>
-    </div>
-  );
+const accentBorderMap: Record<string, string> = {
+  green: 'border-l-[3px] border-l-[#078930]',
+  blue:  'border-l-[3px] border-l-[#2E5B8A]',
+  amber: 'border-l-[3px] border-l-[#C47900]',
+  red:   'border-l-[3px] border-l-[#B91C1C]',
+  none:  '',
 };
+
+const paddingMap: Record<string, string> = {
+  none: '',
+  sm:   'p-4',
+  md:   'p-5',
+  lg:   'p-6',
+};
+
+export const Card: React.FC<CardProps> = ({
+  children, className = '', title, subtitle, actions,
+  padding = 'md', accentColor = 'none',
+}) => (
+  <div className={`card ${accentBorderMap[accentColor]} ${className}`}>
+    {(title || actions) && (
+      <div className="card-header">
+        <div style={{ minWidth: 0 }}>
+          {title && (
+            <h3 style={{ margin: 0, fontSize: 14.5, fontWeight: 700, color: '#0F2040', lineHeight: 1.3 }}>
+              {title}
+            </h3>
+          )}
+          {subtitle && (
+            <p style={{ margin: '3px 0 0', fontSize: 12, color: '#8898B4' }}>{subtitle}</p>
+          )}
+        </div>
+        {actions && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
+            {actions}
+          </div>
+        )}
+      </div>
+    )}
+    <div className={paddingMap[padding]}>{children}</div>
+  </div>
+);

@@ -1,4 +1,3 @@
-// MInT IMS Design System
 import React, { useEffect } from 'react';
 
 interface ModalProps {
@@ -10,66 +9,58 @@ interface ModalProps {
   size?: 'sm' | 'md' | 'lg' | 'xl';
 }
 
+const sizeMap = { sm: 420, md: 560, lg: 720, xl: 960 };
+
 export const Modal: React.FC<ModalProps> = ({
-  isOpen,
-  onClose,
-  title,
-  subtitle,
-  children,
-  size = 'md',
+  isOpen, onClose, title, subtitle, children, size = 'md',
 }) => {
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
     if (isOpen) {
-      document.addEventListener('keydown', handleEscape);
+      document.addEventListener('keydown', onKey);
       document.body.style.overflow = 'hidden';
     }
     return () => {
-      document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'unset';
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
     };
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
-  const sizeClasses: Record<string, string> = {
-    sm: 'max-w-sm',
-    md: 'max-w-lg',
-    lg: 'max-w-2xl',
-    xl: 'max-w-4xl',
-  };
-
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      {/* Backdrop */}
+    <div className="modal-overlay" onClick={onClose}>
       <div
-        className="absolute inset-0 bg-mint-navy/50"
-        onClick={onClose}
-      />
-
-      {/* Dialog */}
-      <div className={`relative bg-white rounded-md shadow-level-3 w-full ${sizeClasses[size]} border border-border-default max-h-[calc(100vh-2rem)] overflow-hidden flex flex-col`}>
+        className="modal-box"
+        style={{ maxWidth: sizeMap[size] }}
+        onClick={e => e.stopPropagation()}
+      >
         {/* Header */}
-        <div className="flex items-start justify-between px-5 py-4 border-b border-border-subtle">
+        <div className="modal-header">
           <div>
-            <h3 className="text-[0.9375rem] font-semibold text-text-primary leading-tight">{title}</h3>
-            {subtitle && <p className="text-caption text-text-hint mt-0.5">{subtitle}</p>}
+            <h3 style={{ margin: 0, fontSize: 16, fontWeight: 700, color: '#0F2040' }}>{title}</h3>
+            {subtitle && (
+              <p style={{ margin: '4px 0 0', fontSize: 12.5, color: '#8898B4' }}>{subtitle}</p>
+            )}
           </div>
-          <button
-            onClick={onClose}
-            className="ml-4 w-7 h-7 flex items-center justify-center rounded text-text-hint hover:text-text-primary hover:bg-surface-page transition-colors flex-shrink-0"
+          <button onClick={onClose} style={{
+            background: '#f0f4fa', border: '1px solid #e8edf5',
+            borderRadius: 8, width: 32, height: 32, cursor: 'pointer',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            color: '#4A5568', flexShrink: 0, transition: 'all 0.18s',
+          }}
+            onMouseEnter={e => { e.currentTarget.style.background = '#e0e7f0'; e.currentTarget.style.color = '#0F2040'; }}
+            onMouseLeave={e => { e.currentTarget.style.background = '#f0f4fa'; e.currentTarget.style.color = '#4A5568'; }}
             aria-label="Close"
           >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
 
         {/* Body */}
-        <div className="px-5 py-5 overflow-y-auto min-h-0 flex-1">{children}</div>
+        <div className="modal-body">{children}</div>
       </div>
     </div>
   );

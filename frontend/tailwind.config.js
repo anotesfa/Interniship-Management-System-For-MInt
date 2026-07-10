@@ -19,7 +19,7 @@ module.exports = {
 
         // ─── Surfaces ─────────────────────────────────
         'surface-white': '#FFFFFF',
-        'surface-page': '#F2F4F8',
+        'surface-page': '#F0F4FA',
         'surface-input': '#F7F9FC',
 
         // ─── Borders ──────────────────────────────────

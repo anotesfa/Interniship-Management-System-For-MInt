@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { EthiopianFlag } from '../common/EthiopianFlag';
 import { UserRole } from '../../types';
 
 interface NavItem {
@@ -12,143 +11,124 @@ interface NavItem {
 }
 
 interface SidebarProps {
-  user: {
-    full_name: string;
-    email: string;
-    role: UserRole;
-  };
+  user: { full_name: string; email: string; role: UserRole };
   navigationLinks: NavItem[];
   onLogout: () => void;
 }
 
+const roleLabel: Record<UserRole, string> = {
+  [UserRole.ADMIN]:      'System Administrator',
+  [UserRole.UNIVERSITY]: 'University Coordinator',
+  [UserRole.SUPERVISOR]: 'Internship Supervisor',
+  [UserRole.STUDENT]:    'Intern Student',
+};
+
+const avatarClass: Record<UserRole, string> = {
+  [UserRole.ADMIN]:      'avatar-navy',
+  [UserRole.UNIVERSITY]: 'avatar-green',
+  [UserRole.SUPERVISOR]: 'avatar-steel',
+  [UserRole.STUDENT]:    'avatar-amber',
+};
+
+function initials(name: string) {
+  return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+}
+
 export const Sidebar: React.FC<SidebarProps> = ({ user, navigationLinks, onLogout }) => {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const getRoleDisplay = (role: UserRole) => {
-    switch (role) {
-      case UserRole.ADMIN:
-        return 'System Administrator';
-      case UserRole.UNIVERSITY:
-        return 'University Coordinator';
-      case UserRole.SUPERVISOR:
-        return 'Internship Supervisor';
-      case UserRole.STUDENT:
-        return 'Intern Student';
-      default:
-        return role;
-    }
-  };
-
-  const getInitials = (name: string) => {
-    return name
-      .split(' ')
-      .map(n => n[0])
-      .join('')
-      .toUpperCase()
-      .slice(0, 2);
-  };
-
-  const getAvatarColor = (role: UserRole) => {
-    switch (role) {
-      case UserRole.ADMIN:
-        return 'bg-mint-navy';
-      case UserRole.SUPERVISOR:
-        return 'bg-mint-blue';
-      case UserRole.STUDENT:
-        return 'bg-mint-light';
-      case UserRole.UNIVERSITY:
-        return 'bg-eth-green';
-      default:
-        return 'bg-mint-navy';
-    }
-  };
+  const navigate  = useNavigate();
+  const location  = useLocation();
 
   return (
-    <aside className="w-[220px] bg-mint-navy text-white flex flex-col h-screen fixed left-0 top-0">
-      {/* Ethiopian Flag Stripe */}
-      <EthiopianFlag variant="header" />
-
-      {/* Logo Area */}
-      <div className="px-[18px] pt-5 pb-4">
-        <div className="flex items-center gap-3 mb-2">
-          <img 
-            src="/assets/images/mint logo6.png" 
-            alt="MInT Logo" 
-            className="w-10 h-10 object-contain"
-          />
-          <div>
-            <h2 className="text-sm font-bold leading-tight">Internship</h2>
-            <h2 className="text-sm font-bold leading-tight">Management System</h2>
-          </div>
-        </div>
-        <p className="text-[11px] text-white/45 leading-tight">Ministry of Innovation</p>
-        <p className="text-[11px] text-white/45 leading-tight">and Technology</p>
-        <span className="inline-block mt-1 text-[10px] text-white/30">v2.0</span>
+    <aside className="sidebar">
+      {/* Ethiopian flag stripe */}
+      <div className="sidebar-flag">
+        <span /><span /><span />
       </div>
 
-      {/* Navigation */}
-      <nav className="flex-1 overflow-y-auto">
-        <div className="px-[18px] py-2">
-          <p className="text-[10px] font-semibold uppercase text-white/35 tracking-wider mb-1">
-            Navigation
-          </p>
+      {/* Logo */}
+      <div className="sidebar-logo">
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6 }}>
+          <div style={{
+            width: 40, height: 40, borderRadius: 10,
+            background: 'rgba(255,255,255,0.08)',
+            border: '1px solid rgba(255,255,255,0.12)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            flexShrink: 0,
+          }}>
+            <img src="/assets/images/mint logo6.png" alt="MInT"
+              style={{ width: 26, height: 26, objectFit: 'contain' }} />
+          </div>
+          <div>
+            <div style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.92)', lineHeight: 1.3 }}>
+              Internship<br />Management
+            </div>
+          </div>
         </div>
-        
+        <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.04em' }}>
+          Ministry of Innovation &amp; Technology
+        </div>
+      </div>
+
+      {/* Nav */}
+      <nav style={{ flex: 1, overflowY: 'auto', paddingBottom: 8 }}>
+        <div className="sidebar-nav-label">Main Menu</div>
         {navigationLinks.map((link) => {
-          const isActive = location.pathname === link.href;
+          const isActive   = location.pathname === link.href || location.pathname.startsWith(link.href + '/');
           const isDisabled = !!link.disabled;
           return (
             <button
               key={link.href}
-              onClick={() => {
-                if (!isDisabled) {
-                  navigate(link.href);
-                }
-              }}
+              onClick={() => { if (!isDisabled) navigate(link.href); }}
               disabled={isDisabled}
-              className={`
-                w-full flex items-center gap-2.5 px-[18px] py-2.5 text-left
-                border-l-[3px] transition-all duration-150
-                ${isDisabled
-                  ? 'border-transparent text-white/35 cursor-not-allowed'
-                  : isActive
-                    ? 'bg-white/10 border-eth-yellow text-white'
-                    : 'border-transparent text-white/65 hover:bg-white/6 hover:text-white/90'
-                }
-              `}
+              className={`nav-item${isActive ? ' active' : ''}${isDisabled ? ' opacity-40 cursor-not-allowed' : ''}`}
+              title={isDisabled ? link.lockHint : undefined}
             >
-              <span className={`text-base ${isActive ? 'text-white' : 'text-white/55'}`}>
-                {link.icon}
-              </span>
-              <span className="flex-1 text-[13px]">{link.label}</span>
+              <span className="nav-item-icon">{link.icon}</span>
+              <span style={{ flex: 1, fontSize: 13 }}>{link.label}</span>
               {isDisabled && (
-                <span className="text-[10px] font-semibold uppercase tracking-wider bg-white/10 text-white/60 rounded-full px-2 py-0.5">
-                  Locked
-                </span>
+                <span style={{
+                  fontSize: 9, fontWeight: 700, letterSpacing: '0.06em',
+                  background: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.4)',
+                  padding: '2px 7px', borderRadius: 20, textTransform: 'uppercase',
+                }}>Locked</span>
               )}
             </button>
           );
         })}
       </nav>
 
-      {/* User Footer */}
-      <div className="border-t border-white/10 p-[14px]">
-        <div className="flex items-center gap-3">
-          <div className={`w-8 h-8 rounded-full ${getAvatarColor(user.role)} flex items-center justify-center text-white text-xs font-semibold`}>
-            {getInitials(user.full_name)}
+      {/* User footer */}
+      <div style={{
+        padding: '12px 14px',
+        borderTop: '1px solid rgba(255,255,255,0.07)',
+        background: 'rgba(0,0,0,0.15)',
+        flexShrink: 0,
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div className={`avatar avatar-sm ${avatarClass[user.role]}`}>
+            {initials(user.full_name)}
           </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-xs font-medium text-white truncate">{user.full_name}</p>
-            <p className="text-[10px] text-white/40 truncate">{getRoleDisplay(user.role)}</p>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.9)',
+              whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              {user.full_name}
+            </div>
+            <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.35)',
+              whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              {roleLabel[user.role]}
+            </div>
           </div>
-          <button
-            onClick={onLogout}
-            className="text-white/55 hover:text-white transition-colors"
-            title="Sign out"
+          <button onClick={onLogout} title="Sign out" style={{
+            background: 'none', border: 'none', cursor: 'pointer',
+            color: 'rgba(255,255,255,0.4)', padding: 6, borderRadius: 8,
+            transition: 'all 0.18s', flexShrink: 0,
+          }}
+            onMouseEnter={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.85)')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.4)')}
           >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
             </svg>
           </button>
         </div>

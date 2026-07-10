@@ -20,12 +20,13 @@ Use these after running `npm run db:reset` from `backend/` and then `npm run see
 
 ## Example Main-Seed Accounts
 
-| Email                    | Password | Role |
-| ------------------------ | -------- | ---- |
-| abebe.kebede@mint.gov    | admin123 | Admin |
-| tigist.mengistu@mint.gov | admin123 | Admin |
-| coordinator@ju.edu.et    | uni123   | University Coordinator |
-| abebe.kebede@aau.edu.et  | super123 | Supervisor |
+| Email                        | Password | Role |
+| ---------------------------- | -------- | ---- |
+| ebisaberhanu199@gmail.com    | admin123 | Admin |
+| tigist.mengistu@mint.gov     | admin123 | Admin |
+| anamtesfa@gmail.com          | uni123   | University Coordinator |
+| ebisaberhanu2004@gmail.com   | super123 | Supervisor |
+| anamtesfa45@gmail.com        | student123 | Student |
 
 ## Notes
 

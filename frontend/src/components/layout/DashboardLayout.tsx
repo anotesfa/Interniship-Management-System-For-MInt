@@ -247,33 +247,40 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
   }
 
   return (
-    <div className="min-h-screen bg-surface-page flex">
+    <div style={{ minHeight: '100vh', background: '#F0F4FA' }}>
       {/* Sidebar */}
-      <Sidebar 
-        user={user} 
-        navigationLinks={navigationLinks} 
-        onLogout={handleLogout} 
+      <Sidebar
+        user={user}
+        navigationLinks={navigationLinks}
+        onLogout={handleLogout}
       />
 
       {/* Main Content Area */}
-      <div className="flex-1 ml-[220px]">
+      <div className="page-shell">
         {/* Top Bar */}
-        <TopBar 
-          title={title} 
+        <TopBar
+          title={title}
           breadcrumb={breadcrumb}
           actions={(
-            <div className="flex items-center gap-2">
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               {actions}
-              <Button variant="secondary" size="sm" onClick={() => setShowChangePassword(true)}>
+              <button
+                onClick={() => setShowChangePassword(true)}
+                className="btn btn-secondary btn-sm"
+              >
+                <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                    d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                </svg>
                 Change Password
-              </Button>
+              </button>
             </div>
           )}
-          unreadCount={unreadCount} 
+          unreadCount={unreadCount}
         />
 
         {/* Page Content */}
-        <main className="p-6">
+        <main className="page-content">
           {children}
         </main>
       </div>

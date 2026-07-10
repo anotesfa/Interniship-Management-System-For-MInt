@@ -88,6 +88,15 @@ MInT Internship Management System is a role-based internship workflow platform f
 
    Use `npm run setup` instead if you only need to push the schema and seed without forcing a full reset.
 
+   After seeding, use these accounts to log in:
+
+   | Email | Password | Role |
+   | --- | --- | --- |
+   | ebisaberhanu199@gmail.com | admin123 | Admin |
+   | anamtesfa@gmail.com | uni123 | University Coordinator |
+   | ebisaberhanu2004@gmail.com | super123 | Supervisor |
+   | anamtesfa45@gmail.com | student123 | Student |
+
 5. Start the API.
    ```bash
    npm run start:dev

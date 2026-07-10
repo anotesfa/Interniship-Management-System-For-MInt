@@ -1,4 +1,3 @@
-// Input component — MInT IMS Design System
 import React from 'react';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -10,61 +9,44 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const Input: React.FC<InputProps> = ({
-  label,
-  error,
-  helperText,
-  leftIcon,
-  rightIcon,
-  className = '',
-  id,
-  ...props
+  label, error, helperText, leftIcon, rightIcon,
+  className = '', id, ...props
 }) => {
   const inputId = id || label?.toLowerCase().replace(/\s+/g, '-');
 
   return (
-    <div className="w-full">
+    <div style={{ width: '100%' }}>
       {label && (
-        <label htmlFor={inputId} className="block text-caption font-semibold text-text-secondary mb-1.5 tracking-wide uppercase">
+        <label htmlFor={inputId} style={{
+          display: 'block', fontSize: 12, fontWeight: 700, color: '#374151',
+          marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.05em',
+        }}>
           {label}
-          {props.required && <span className="text-eth-red ml-1 font-normal normal-case">*</span>}
+          {props.required && <span style={{ color: '#B91C1C', marginLeft: 3, fontWeight: 400, textTransform: 'none' }}>*</span>}
         </label>
       )}
-
-      <div className="relative flex items-center">
+      <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
         {leftIcon && (
-          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-text-hint pointer-events-none">
+          <div style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)',
+            color: '#8898B4', pointerEvents: 'none', display: 'flex' }}>
             {leftIcon}
           </div>
         )}
-
         <input
           id={inputId}
-          className={`
-            w-full h-[40px] rounded border text-body-sm text-text-primary
-            placeholder:text-text-hint bg-surface-input
-            transition-colors duration-150
-            focus:outline-none focus:ring-2 focus:ring-mint-blue focus:ring-offset-0 focus:bg-white
-            disabled:bg-surface-page disabled:text-text-hint disabled:cursor-not-allowed
-            ${leftIcon  ? 'pl-9 pr-3.5' : 'px-3.5'}
-            ${rightIcon ? 'pr-9'        : ''}
-            ${error
-              ? 'border-eth-red focus:border-eth-red focus:ring-eth-red/20'
-              : 'border-border-default focus:border-mint-steel'
-            }
-            ${className}
-          `}
+          className={`input-field${error ? ' error' : ''} ${className}`}
+          style={{ paddingLeft: leftIcon ? 40 : 14, paddingRight: rightIcon ? 40 : 14 }}
           {...props}
         />
-
         {rightIcon && (
-          <div className="absolute right-3 top-1/2 -translate-y-1/2 text-text-hint">
+          <div style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)',
+            color: '#8898B4', display: 'flex' }}>
             {rightIcon}
           </div>
         )}
       </div>
-
-      {error      && <p className="mt-1 text-caption text-eth-red">{error}</p>}
-      {helperText && !error && <p className="mt-1 text-caption text-text-hint">{helperText}</p>}
+      {error      && <p style={{ margin: '5px 0 0', fontSize: 12, color: '#B91C1C' }}>{error}</p>}
+      {helperText && !error && <p style={{ margin: '5px 0 0', fontSize: 12, color: '#8898B4' }}>{helperText}</p>}
     </div>
   );
 };

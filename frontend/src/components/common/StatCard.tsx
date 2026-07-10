@@ -1,71 +1,58 @@
-// StatCard — MInT IMS Design System
 import React from 'react';
 
 interface StatCardProps {
   label: string;
   value: string | number;
-  delta?: {
-    value: string;
-    type: 'positive' | 'negative' | 'neutral';
-  };
-  accentColor?: 'green' | 'blue' | 'amber' | 'red' | 'orange';
+  delta?: { value: string; type: 'positive' | 'negative' | 'neutral' };
+  accentColor?: 'green' | 'blue' | 'amber' | 'red' | 'orange' | 'navy';
   icon?: React.ReactNode;
   className?: string;
 }
 
+const colorMap: Record<string, { border: string; iconBg: string; iconColor: string; valueColor: string }> = {
+  navy:   { border: '#0F2040', iconBg: 'rgba(15,32,64,0.08)',  iconColor: '#0F2040', valueColor: '#0F2040' },
+  blue:   { border: '#2E5B8A', iconBg: 'rgba(46,91,138,0.08)', iconColor: '#2E5B8A', valueColor: '#0F2040' },
+  green:  { border: '#078930', iconBg: 'rgba(7,137,48,0.08)',  iconColor: '#078930', valueColor: '#0F2040' },
+  amber:  { border: '#C47900', iconBg: 'rgba(196,121,0,0.08)', iconColor: '#C47900', valueColor: '#0F2040' },
+  red:    { border: '#B91C1C', iconBg: 'rgba(185,28,28,0.08)', iconColor: '#B91C1C', valueColor: '#0F2040' },
+  orange: { border: '#C04A00', iconBg: 'rgba(192,74,0,0.08)',  iconColor: '#C04A00', valueColor: '#0F2040' },
+};
+
+const deltaStyle = {
+  positive: { color: '#065F36' },
+  negative: { color: '#8B1A1A' },
+  neutral:  { color: '#8898B4' },
+};
+const deltaPrefix = { positive: '↑ ', negative: '↓ ', neutral: '' };
+
 export const StatCard: React.FC<StatCardProps> = ({
-  label,
-  value,
-  delta,
-  accentColor = 'blue',
-  icon,
-  className = '',
+  label, value, delta, accentColor = 'blue', icon, className = '',
 }) => {
-  const accentBorder: Record<string, string> = {
-    green: 'border-l-eth-green',
-    blue:  'border-l-mint-steel',
-    amber: 'border-l-status-pending-dot',
-    red:   'border-l-eth-red',
-    orange: 'border-l-status-hold-dot',
-  };
-
-  const deltaColor: Record<string, string> = {
-    positive: 'text-status-approved-text',
-    negative: 'text-status-rejected-text',
-    neutral:  'text-text-hint',
-  };
-
-  const deltaPrefix: Record<string, string> = {
-    positive: '↑ ',
-    negative: '↓ ',
-    neutral:  '',
-  };
-
+  const c = colorMap[accentColor] || colorMap.blue;
   return (
-    <div
-      className={`
-        bg-surface-white rounded-md border border-border-default shadow-level-1
-        border-l-[3px] ${accentBorder[accentColor]}
-        p-5 flex flex-col gap-3 ${className}
-      `}
-    >
-      <div className="flex items-start justify-between gap-2">
-        <p className="text-caption font-semibold uppercase tracking-wider text-text-hint">
+    <div className={`stat-card ${className}`}
+      style={{ borderLeft: `3px solid ${c.border}` }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12 }}>
+        <p style={{ margin: 0, fontSize: 11, fontWeight: 700, textTransform: 'uppercase',
+          letterSpacing: '0.07em', color: '#8898B4' }}>
           {label}
         </p>
         {icon && (
-          <div className="text-text-hint w-4 h-4 flex-shrink-0">
+          <div style={{
+            width: 36, height: 36, borderRadius: 10, flexShrink: 0,
+            background: c.iconBg, color: c.iconColor,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}>
             {icon}
           </div>
         )}
       </div>
-
-      <div>
-        <p className="text-[1.75rem] font-bold text-text-primary leading-none">
+      <div style={{ marginTop: 12 }}>
+        <p style={{ margin: 0, fontSize: 28, fontWeight: 800, color: c.valueColor, lineHeight: 1 }}>
           {value}
         </p>
         {delta && (
-          <p className={`text-caption mt-1.5 font-medium ${deltaColor[delta.type]}`}>
+          <p style={{ margin: '6px 0 0', fontSize: 12, fontWeight: 600, ...deltaStyle[delta.type] }}>
             {deltaPrefix[delta.type]}{delta.value}
           </p>
         )}
