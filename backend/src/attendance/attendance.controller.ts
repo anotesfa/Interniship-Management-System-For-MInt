@@ -7,6 +7,7 @@ import { RolesGuard } from '../common/guards/roles.guard';
 import { Roles } from '../common/decorators/roles.decorator';
 import { AttendanceService } from './attendance.service';
 
+
 @Controller('attendance')
 @UseGuards(AuthGuard('jwt'), RolesGuard)
 export class AttendanceController {
