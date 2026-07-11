@@ -146,5 +146,5 @@ MInT Internship Management System is a role-based internship workflow platform f
 ## Notes
 
 - Detailed usage guide: [Documentation/Usage-Guide.md](Documentation/Usage-Guide.md)
-- After a reset, the seeded accounts listed in `passwords.md` are the quickest way to verify the latest changes.
+- After a reset, the seeded accounts listed in `passwords.md` are the quickest  way to verify the latest changes.
 - The backend seed clears existing seeded data before repopulating it, so the reset command is safe to rerun when you need a fresh local database.
