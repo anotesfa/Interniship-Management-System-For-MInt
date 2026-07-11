@@ -13,6 +13,7 @@ export class AssignmentService {
       },
     });
 
+
     // Filter supervisors who haven't reached max_students
     const available = supervisors.filter(
       supervisor => supervisor.assignments.length < supervisor.max_students,
